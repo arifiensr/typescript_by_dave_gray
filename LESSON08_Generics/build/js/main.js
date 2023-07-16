@@ -1,46 +1,32 @@
 "use strict";
-// * Index Signatures
-const todaysTransactions = {
-    Pizza: -10,
-    Books: -5,
-    Job: 50,
-    Arifien: 30,
+const echo = (arg) => arg;
+const isObj = (arg) => {
+    return typeof arg === 'object' && !Array.isArray(arg) && arg !== null;
 };
-console.log(todaysTransactions.Pizza);
-console.log(todaysTransactions['Pizza']);
-let prop = 'Pizza';
-console.log(todaysTransactions[prop]);
-const todaysNet = (transactions) => {
-    let total = 0;
-    for (const transaction in transactions) {
-        total += transactions[transaction];
+console.log(isObj(true));
+console.log(isObj('John'));
+console.log(isObj([1, 2, 3]));
+console.log(isObj({ name: 'John' }));
+console.log(isObj(null));
+const isTrue = (arg) => {
+    if (Array.isArray(arg) && !arg.length) {
+        return { arg, is: false };
     }
-    return total;
+    if (isObj(arg) && !Object.keys(arg).length) {
+        return { arg, is: false };
+    }
+    return { arg, is: !!arg };
 };
-console.log(todaysNet(todaysTransactions));
-// todaysTransactions.Pizza = 40 // it can't because readonly
-console.log(todaysTransactions['Arifien']);
-const student = {
-    name: 'Doug',
-    GPA: 3.5,
-    classes: [100, 200],
-};
-// console.log(student.test);
-for (const key in student) {
-    console.log(`${key}: ${student[key]}`);
-}
-Object.keys(student).map((key) => {
-    console.log(student[key]);
-});
-const logStudentKey = (student, key) => {
-    console.log(`Student ${key}: ${student[key]}`);
-};
-logStudentKey(student, 'GPA');
-const monthlyIncomes = {
-    salary: 500,
-    bonus: 100,
-    sidehustle: 250,
-};
-for (const revenue in monthlyIncomes) {
-    console.log(monthlyIncomes[revenue]);
-}
+console.log(isTrue(false));
+console.log(isTrue(0));
+console.log(isTrue(true));
+console.log(isTrue(1));
+console.log(isTrue('Dave'));
+console.log(isTrue(''));
+console.log(isTrue(null));
+console.log(isTrue(undefined));
+console.log(isTrue({}));
+console.log(isTrue({ name: 'Arifien' }));
+console.log(isTrue([1, 2, 3]));
+console.log(isTrue(NaN));
+console.log(isTrue(-0));
